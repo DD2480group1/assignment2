@@ -7,21 +7,25 @@ public class compile {
 		try {
 			boolean isWindows = isWindows();
 			Process process;
-			String[] commands;
 			if (isWindows) {
-				String command = "cmd.exe /c echo 1";
+				String command = "cmd.exe /c echo 1 & echo %errorlevel%";
 				process = Runtime.getRuntime().exec(command);
 			} else {
-				commands = new String[]{"sh", "-c", "echo 1"};
+				String[] commands = new String[]{"sh", "-c", "echo 1; echo $?"};
 				process = Runtime.getRuntime().exec(commands);
 			}
 
 			String result = new BufferedReader(new InputStreamReader(process.getInputStream()))
 					.lines().collect(Collectors.joining("\n"));
-			String error = new BufferedReader(new InputStreamReader(process.getErrorStream()))
-					.lines().collect(Collectors.joining("\n"));
-			//System.out.println(result);
-			//System.out.println(error);
+			
+			String[] lines = result.split("\n");
+			int errorCode = Integer.parseInt(lines[lines.length-1]);
+
+			if (errorCode == 0) {
+				System.out.println("Ran successfully");
+			} else {
+				System.out.println("Failed");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

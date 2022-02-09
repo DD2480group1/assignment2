@@ -8,16 +8,16 @@ public class compile {
 			boolean isWindows = isWindows();
 			Process process;
 			if (isWindows) {
-				String command = "cmd.exe /c echo 1 & echo %errorlevel%";
+				String command = "cmd.exe /c mvn compile & echo %errorlevel%";
 				process = Runtime.getRuntime().exec(command);
 			} else {
-				String[] commands = new String[]{"sh", "-c", "echo 1; echo $?"};
+				String[] commands = new String[]{"sh", "-c", "mvn compile; echo $?"};
 				process = Runtime.getRuntime().exec(commands);
 			}
 
 			String result = new BufferedReader(new InputStreamReader(process.getInputStream()))
 					.lines().collect(Collectors.joining("\n"));
-			
+
 			String[] lines = result.split("\n");
 			int errorCode = Integer.parseInt(lines[lines.length-1]);
 

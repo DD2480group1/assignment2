@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 public class compile {
-	public static void main(String[] args) {
+	public static void compileProject() {
 		try {
 			boolean isWindows = isWindows();
 			Process process;

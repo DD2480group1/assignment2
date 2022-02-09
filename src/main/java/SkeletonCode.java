@@ -3,10 +3,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 
 import java.io.IOException;
+import java.nio.file.Paths;
+import org.eclipse.jgit.api.Git;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.eclipse.jgit.api.errors.GitAPIException;
 
 /**
  * Skeleton of a ContinuousIntegrationServer which acts as webhook
@@ -31,6 +34,19 @@ class SkeletonCode extends AbstractHandler {
 		// 2nd compile the code
 
 		response.getWriter().println("CI job done");
+	}
+
+	public static boolean cloneRepo() {
+		String url = "https://github.com/DD2480group1/assignment2";
+		String path = "./repo/";
+
+		try {
+			Git.cloneRepository().setURI(url).setDirectory(Paths.get(path).toFile()).call();
+			return true;
+		} catch (GitAPIException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	// used to start the CI server in command line

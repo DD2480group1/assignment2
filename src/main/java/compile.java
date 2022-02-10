@@ -36,8 +36,4 @@ public class compile {
 	private static boolean isWindows() {
 		return System.getProperty("os.name").toLowerCase().startsWith("windows");
 	}
-
-	public static void main(String[] args) {
-		compileProject();
-	}
 }

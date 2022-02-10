@@ -12,7 +12,7 @@ public class compile {
 				String command = "cmd.exe /c cd repo/ & mvn compile & echo %errorlevel%";
 				process = Runtime.getRuntime().exec(command);
 			} else {
-				String[] commands = new String[]{"sh", "-c","mvn compile; echo $?"};
+				String[] commands = new String[]{"sh", "-c","cd repo/ mvn compile; echo $?"};
 				process = Runtime.getRuntime().exec(commands);
 			}
 

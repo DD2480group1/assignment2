@@ -49,8 +49,7 @@ class SkeletonCode extends AbstractHandler {
             System.out.println("Failed to clone repo from" + url);
         }
 
-
-
+        compile.compileProject();
 
         response.getWriter().println("CI job done");
     }

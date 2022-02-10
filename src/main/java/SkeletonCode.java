@@ -1,20 +1,18 @@
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.io.*;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.eclipse.jgit.api.errors.GitAPIException;
-
-import javax.json.*;
 
 /**
  * Skeleton of a ContinuousIntegrationServer which acts as webhook
@@ -39,7 +37,19 @@ class SkeletonCode extends AbstractHandler {
         String payload = reader.lines().collect(Collectors.joining());
         reader.close();
 
-        System.out.println(payload);
+        JsonObject obj = JsonUtil.getJson(payload);
+        String commitMsg = JsonUtil.getCommitMsg(obj);
+        System.out.println(commitMsg);
+        String url = JsonUtil.getRepoUrl(obj);
+
+        boolean cloneSucceeded = CloneRepo.cloneRepo(url);
+        if (cloneSucceeded) {
+            System.out.println("Successfully cloned repo from" + url);
+        } else {
+            System.out.println("Failed to clone repo from" + url);
+        }
+
+        compile.compileProject();
 
         response.getWriter().println("CI job done");
     }
@@ -59,30 +69,16 @@ class SkeletonCode extends AbstractHandler {
 
         }
         String contents = scanner.useDelimiter("\\A").next();
-        scanner.close(); // Put this call in a finally block
+        scanner.close();
 
         return contents;
     }
 
 
-    public static boolean cloneRepo() {
-        String url = "https://github.com/DD2480group1/assignment2";
-        String path = "./repo/";
-
-        try {
-            Git.cloneRepository().setURI(url).setDirectory(Paths.get(path).toFile()).call();
-            return true;
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     // used to start the CI server in command line
     public static void main(String[] args) throws Exception {
         Server server = new Server(8080);
         server.setHandler(new SkeletonCode());
-        //System.out.println(readFile("./src/main/java/test.json"));
         server.start();
         server.join();
     }

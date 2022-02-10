@@ -3,7 +3,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.StringReader;
 
-public class Json {
+public class JsonUtil {
     /**
      *
      * @param payload the string to convert

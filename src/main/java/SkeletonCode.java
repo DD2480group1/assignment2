@@ -3,8 +3,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -51,7 +49,7 @@ class SkeletonCode extends AbstractHandler {
      * @param path
      * @return
      */
-    private static String readFile(String path) {
+    public static String readFile(String path) {
         File file = new File(path);
         Scanner scanner = null;
         try {
@@ -84,7 +82,7 @@ class SkeletonCode extends AbstractHandler {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8080);
         server.setHandler(new SkeletonCode());
-        System.out.println(readFile("./src/main/java/test.json"));
+        //System.out.println(readFile("./src/main/java/test.json"));
         server.start();
         server.join();
     }

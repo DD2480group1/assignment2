@@ -28,7 +28,7 @@ public class JsonUtil {
      * @return the email from the person that pushed
      */
     public static String getHeadCommitEmail(JsonObject payload) {
-        return payload.getJsonObject("head_commit").getString("email");
+        return payload.getJsonObject("head_commit").getJsonObject("author").getString("email");
     }
 
     /**
@@ -36,8 +36,7 @@ public class JsonUtil {
      * @return the id of the head commit
      */
     public static String getHeadCommitId(JsonObject payload) {
-        return payload.getJsonObject("head_commit").getJsonObject("author")
-                .getString("id");
+        return payload.getJsonObject("head_commit").getString("id");
     }
 
     /**

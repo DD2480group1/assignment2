@@ -3,7 +3,8 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 public class compile {
-	public static void compileProject() {
+	public static int compileProject() {
+		int errorCode = -1;
 		try {
 			boolean isWindows = isWindows();
 			Process process;
@@ -19,7 +20,7 @@ public class compile {
 					.lines().collect(Collectors.joining("\n"));
 
 			String[] lines = result.split("\n");
-			int errorCode = Integer.parseInt(lines[lines.length-1]);
+			errorCode = Integer.parseInt(lines[lines.length-1]);
 
 			if (errorCode == 0) {
 				System.out.println("Ran successfully");
@@ -29,10 +30,14 @@ public class compile {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		return errorCode;
 	}
 
 	private static boolean isWindows() {
 		return System.getProperty("os.name").toLowerCase().startsWith("windows");
 	}
 
+	public static void main(String[] args) {
+		compileProject();
+	}
 }

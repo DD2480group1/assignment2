@@ -59,7 +59,7 @@ class SkeletonCode extends AbstractHandler {
      * @param path
      * @return
      */
-    private static String readFile(String path) {
+    public static String readFile(String path) {
         File file = new File(path);
         Scanner scanner = null;
         try {

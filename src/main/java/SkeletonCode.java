@@ -1,22 +1,16 @@
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.io.*;
-
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.handler.AbstractHandler;
-import org.eclipse.jgit.api.errors.GitAPIException;
-
-import javax.json.*;
 
 /**
  * Skeleton of a ContinuousIntegrationServer which acts as webhook
@@ -66,19 +60,6 @@ class SkeletonCode extends AbstractHandler {
         return contents;
     }
 
-
-    public static boolean cloneRepo() {
-        String url = "https://github.com/DD2480group1/assignment2";
-        String path = "./repo/";
-
-        try {
-            Git.cloneRepository().setURI(url).setDirectory(Paths.get(path).toFile()).call();
-            return true;
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     // used to start the CI server in command line
     public static void main(String[] args) throws Exception {

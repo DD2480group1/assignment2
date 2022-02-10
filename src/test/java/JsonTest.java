@@ -7,7 +7,7 @@ public class JsonTest {
 
     SkeletonCode skeletonCode = new SkeletonCode();
     String test = skeletonCode.readFile("./src/main/java/test.json");
-    Json json = new Json();
+    JsonUtil json = new JsonUtil();
     JsonObject jsonObject = json.getJson(test);
 
     //Tests if the RepoURL is retrieved correctly from test file

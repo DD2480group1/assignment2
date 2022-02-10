@@ -2,6 +2,8 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,16 @@ class SkeletonCode extends AbstractHandler {
 
         System.out.println(payload);
 
+        JsonObject obj = JsonUtil.getJson(payload);
+
+        String commitMsg = JsonUtil.getCommitMsg(obj);
+        String url = JsonUtil.getRepoUrl(obj);
+        CloneRepo.cloneRepo(url);
+
+        System.out.println(commitMsg);
+
+
+
         response.getWriter().println("CI job done");
     }
 
@@ -55,7 +67,7 @@ class SkeletonCode extends AbstractHandler {
 
         }
         String contents = scanner.useDelimiter("\\A").next();
-        scanner.close(); // Put this call in a finally block
+        scanner.close();
 
         return contents;
     }
@@ -65,7 +77,6 @@ class SkeletonCode extends AbstractHandler {
     public static void main(String[] args) throws Exception {
         Server server = new Server(8080);
         server.setHandler(new SkeletonCode());
-        System.out.println(readFile("./src/main/java/test.json"));
         server.start();
         server.join();
     }

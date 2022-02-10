@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.io.*;
@@ -51,7 +52,7 @@ class SkeletonCode extends AbstractHandler {
      * @param path
      * @return
      */
-    private static String readFile(String path) {
+    public static String readFile(String path) {
         File file = new File(path);
         Scanner scanner = null;
         try {
@@ -67,12 +68,12 @@ class SkeletonCode extends AbstractHandler {
     }
 
 
-    public static boolean cloneRepo() {
-        String url = "https://github.com/DD2480group1/assignment2";
+    public static boolean cloneRepo(String branch) {
+        String url = "https://github.com/DD2480group1/assignment2.git";
         String path = "./repo/";
 
         try {
-            Git.cloneRepository().setURI(url).setDirectory(Paths.get(path).toFile()).call();
+            Git.cloneRepository().setURI(url).setBranchesToClone(Arrays.asList(branch)).setDirectory(Paths.get(path).toFile()).call();
             return true;
         } catch (GitAPIException e) {
             e.printStackTrace();

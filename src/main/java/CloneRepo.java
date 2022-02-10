@@ -5,16 +5,17 @@ import org.eclipse.jgit.util.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class CloneRepo {
-    public static boolean cloneRepo(String url){
+    public static boolean cloneRepo(String url, String branch){
         String path = "./repo/";
         try {
             // If folder already exists remove it.
             FileUtils.delete(new File(path), FileUtils.RECURSIVE);
         } catch (IOException e) {}
         try {
-            Git.cloneRepository().setURI(url).setDirectory(Paths.get(path).toFile()).call();
+            Git.cloneRepository().setURI(url).setBranchesToClone(Arrays.asList(branch)).setDirectory(Paths.get(path).toFile()).call();
             return true;
         } catch (GitAPIException e) {
             e.printStackTrace();

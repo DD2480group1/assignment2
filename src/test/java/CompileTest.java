@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 public class CompileTest {
     compile compile = new compile();
-    boolean cloneSucceeded = CloneRepo.cloneRepo("https://github.com/DD2480group1/assignment2/");
+    boolean cloneSucceeded = CloneRepo.cloneRepo("https://github.com/DD2480group1/assignment2/", "refs/heads/main");
 
     //Tests if the cloning of the repo works
     @Test

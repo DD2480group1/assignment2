@@ -68,10 +68,11 @@ class SkeletonCode extends AbstractHandler {
 
         JsonObject obj = JsonUtil.getJson(payload);
         String commitMsg = JsonUtil.getCommitMsg(obj);
+        String ref = JsonUtil.getCommitRef(obj);
         System.out.println(commitMsg);
         String url = JsonUtil.getRepoUrl(obj);
 
-        boolean cloneSucceeded = CloneRepo.cloneRepo(url);
+        boolean cloneSucceeded = CloneRepo.cloneRepo(url, ref);
         if (cloneSucceeded) {
             System.out.println("Successfully cloned repo from" + url);
         } else {

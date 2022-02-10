@@ -47,5 +47,15 @@ public class JsonUtil {
         return payload.getJsonObject("head_commit").getString("message");
     }
 
+    /**
+     * @param payload the http payload of the webhook request
+     * @return the commit ref of the commit
+     */
+    public static String getCommitRef(JsonObject payload) {
+        return payload.getString("ref");
+    }
+
+
+
 
 }

@@ -80,6 +80,7 @@ class SkeletonCode extends AbstractHandler {
         }
 
         compile.compileProject();
+        compile.testRepo();
 
         httpServletResponse.getWriter().println("CI job done");
     }

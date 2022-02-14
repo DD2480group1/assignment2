@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Optional;
 
 public class Database {
 	private static Connection dbConnectionInit(String repo) throws SQLException {
@@ -12,7 +13,7 @@ public class Database {
 				"key INTEGER NOT NULL PRIMARY KEY, " +
 				"commitId text, " +
 				"branch txt," +
-				"commitDate TIMESTAMP," +
+				"timeStamp TIMESTAMP," +
 				"description txt" +
 				")";
 		Statement stmt = conn.createStatement();
@@ -25,15 +26,15 @@ public class Database {
 
 
 	private static PreparedStatement getInsertPrepStmt(Connection conn, tableEntry entry) throws SQLException {
-		PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO History (commitId, branch, commitDate, description) VALUES(?, ?, ?, ?)");
+		PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO History (commitId, branch, timeStamp, description) VALUES(?, ?, ?, ?)");
 		prepStmt.setString(1, entry.commitId);
 		prepStmt.setString(2, entry.branch);
-		prepStmt.setString(3, entry.timeStamp);
+		prepStmt.setTimestamp(3, entry.timeStamp);
 		prepStmt.setString(4, entry.description);
 		return prepStmt;
 	}
 
-	static boolean addCommit(String repo, tableEntry entry) {
+	public static boolean addCommit(String repo, tableEntry entry) {
 		try {
 			Connection conn = dbConnectionInit(repo);
 			PreparedStatement prepStmt = getInsertPrepStmt(conn, entry);
@@ -45,4 +46,34 @@ public class Database {
 			return false;
 		}
 	}
+
+	public static Optional<tableEntry> getRow(String repo, String commitId) {
+		try {
+			Connection conn = DriverManager.getConnection(jdbcUrl(repo));
+			PreparedStatement query = conn.prepareStatement("SELECT * FROM History WHERE commitId = ?");
+			query.setString(1, commitId);
+			ResultSet rs = query.executeQuery();
+
+			return getTableEntry(rs);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return Optional.empty();
+		}
+
+	}
+
+	private static Optional<tableEntry> getTableEntry(ResultSet rs) throws SQLException {
+		if (!rs.next()) {
+			return Optional.empty();
+		}
+
+		String commitId = rs.getString("commitId");
+		String branch = rs.getString("branch");
+		Timestamp timeStamp = rs.getTimestamp("timeStamp");
+		String description = rs.getString("description");
+
+		return Optional.of(new tableEntry(commitId, branch, timeStamp, description));
+	}
+
 }

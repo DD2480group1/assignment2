@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Database {
@@ -54,8 +56,11 @@ public class Database {
 			query.setString(1, commitId);
 			ResultSet rs = query.executeQuery();
 
-			return getTableEntry(rs);
+			if (!rs.next()) {
+				return Optional.empty();
+			}
 
+			return Optional.of(getTableEntry(rs));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Optional.empty();
@@ -63,17 +68,31 @@ public class Database {
 
 	}
 
-	private static Optional<tableEntry> getTableEntry(ResultSet rs) throws SQLException {
-		if (!rs.next()) {
-			return Optional.empty();
-		}
+	private static tableEntry getTableEntry(ResultSet rs) throws SQLException {
 
 		String commitId = rs.getString("commitId");
 		String branch = rs.getString("branch");
 		Timestamp timeStamp = rs.getTimestamp("timeStamp");
 		String description = rs.getString("description");
 
-		return Optional.of(new tableEntry(commitId, branch, timeStamp, description));
+		return new tableEntry(commitId, branch, timeStamp, description);
+	}
+
+
+	public static List<tableEntry> getRows(String repo) {
+		try {
+			Connection conn = DriverManager.getConnection(jdbcUrl(repo));
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM History");
+			ArrayList<tableEntry> rows = new ArrayList<>();
+			while (rs.next()) {
+				rows.add(getTableEntry(rs));
+			}
+			return rows;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
 	}
 
 }

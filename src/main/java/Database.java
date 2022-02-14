@@ -1,7 +1,8 @@
+import javax.management.Query;
+import java.net.ConnectException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.locks.Condition;
 
 public class Database {
 	private static Connection dbConnectionInit(String repo) throws SQLException {
@@ -78,7 +79,6 @@ public class Database {
 		return new tableEntry(commitId, branch, timeStamp, description);
 	}
 
-
 	public static List<tableEntry> getRows(String repo) {
 		try {
 			Connection conn = DriverManager.getConnection(jdbcUrl(repo));
@@ -95,4 +95,45 @@ public class Database {
 		}
 	}
 
+	public static List<tableEntry> getRows(String repo, QueryParams params) {
+		try {
+			Connection conn = DriverManager.getConnection(jdbcUrl(repo));
+			PreparedStatement query = prepareQuery(conn, params);
+			ResultSet rs = query.executeQuery();
+
+			ArrayList<tableEntry> rows = new ArrayList<>();
+			while (rs.next()) {
+				rows.add(getTableEntry(rs));
+			}
+			return rows;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return new ArrayList<>();
+		}
+	}
+
+	private static PreparedStatement prepareQuery(Connection conn, QueryParams params) throws SQLException {
+		String query = "SELECT * FROM History" + params.getQueryString();
+		PreparedStatement prepStmt = conn.prepareStatement(query);
+		int idx = 1;
+		if (params.commitId.isPresent()) {
+			prepStmt.setString(idx, params.commitId.get());
+			idx++;
+		}
+		if (params.branch.isPresent()) {
+			prepStmt.setString(idx, params.branch.get());
+			idx++;
+		}
+		if (params.before.isPresent()) {
+			prepStmt.setTimestamp(idx, params.before.get());
+			idx++;
+		}
+
+		if (params.after.isPresent()) {
+			prepStmt.setTimestamp(idx, params.after.get());
+			idx++;
+		}
+
+		return prepStmt;
+	}
 }

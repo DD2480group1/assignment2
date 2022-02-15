@@ -7,6 +7,20 @@
 # Test Execution has been implemented and unit-tested in the following way -
 
 # Notification has been implemented and unit-tested in the following way - 
+1. The Dependencies were added to the POM file
+2. We imported the following packages and classes for the code to work
+    - import java.util.Properties
+    - import javax.mail.Message
+    - import javax.mail.MessagingException
+    - import javax.mail.PasswordAuthentication
+    - import javax.mail.Session
+    - import javax.mail.Transport
+    - import javax.mail.internet.InternetAddress
+    - import javax.mail.internet.MimeMessage
+3. We used a JAVA code to send emails using Gmail SMTP server
+
+The Notification has been unit-tested in the following way - 
+    - 
 
 # To run the code and tests, please follow the following steps - 
 Firstly, follow these steps to get ngrok to work (i.e the server) https://dashboard.ngrok.com/get-started/setup. Change from port 80 to 8081 when looking at step 3 (on the link).

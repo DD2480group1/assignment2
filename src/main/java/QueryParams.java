@@ -15,7 +15,14 @@ public class QueryParams {
 		commitId = builder.commitId;
 		branch = builder.branch;
 		before = builder.before;
-		after = builder.after;
+	}
+
+	public QueryParams(String commitId, String branch, Timestamp before, Timestamp after) {
+		this.after = Optional.ofNullable(after);
+		this.commitId = Optional.ofNullable(commitId);
+		this.branch = Optional.ofNullable(branch);
+		this.before = Optional.ofNullable(before);
+		this.after = Optional.ofNullable(after);
 	}
 
 	public String getQueryString() {

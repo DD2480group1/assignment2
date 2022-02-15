@@ -1,3 +1,4 @@
+import com.sendermail.SendMail;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
@@ -71,6 +72,7 @@ class SkeletonCode extends AbstractHandler {
         String ref = JsonUtil.getCommitRef(obj);
         System.out.println(commitMsg);
         String url = JsonUtil.getRepoUrl(obj);
+        String email = JsonUtil.getHeadCommitEmail(obj);
 
         boolean cloneSucceeded = CloneRepo.cloneRepo(url, ref);
         if (cloneSucceeded) {
@@ -79,8 +81,12 @@ class SkeletonCode extends AbstractHandler {
             System.out.println("Failed to clone repo from" + url);
         }
 
-        compile.compileProject();
-        compile.testRepo();
+        String compileMessage = compile.compileProject();
+
+        String testMessage = compile.testRepo();
+
+        SendMail mail = new SendMail();
+        mail.sendMail(compileMessage, testMessage, ref, email);
 
         httpServletResponse.getWriter().println("CI job done");
     }

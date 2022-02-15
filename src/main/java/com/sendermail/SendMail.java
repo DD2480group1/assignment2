@@ -50,23 +50,24 @@ public class SendMail {
             // Set Subject: header field
             message.setSubject("This is a push for " + issue);
 
+            //Prep status message
             String status = "";
 
             String[] lines = compile.split("\n");
             int errorCode = Integer.parseInt(lines[lines.length-1]);
             if (errorCode == 0){
-                status += "THE BUILD OF THE PROJECT WAS SUCCESSFUL \n";
+                status = status + "THE BUILD OF THE PROJECT WAS SUCCESSFUL \n";
             }
             lines = test.split("\n");
             errorCode = Integer.parseInt(lines[lines.length-1]);
             if (errorCode == 0){
-                status += "THE RUNNING OF THE TESTS WAS SUCCESSFUL \n";
+                status = status + "THE RUNNING OF THE TESTS WAS SUCCESSFUL \n";
             }
-            status += "See additional build and test details below \n";
-            status += "-------------------------------------------";
+            status = status + "See additional build and test details below \n";
+            status = status +  "-------------------------------------------";
+
             // Set email message
-            String mailcontent = status + compile + "\n" + test;
-            message.setText(mailcontent);
+            message.setText(status + compile + "\n" + test);
 
             System.out.println("sending...");
             // Send message

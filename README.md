@@ -1,14 +1,20 @@
 ## DD2480 - Continuous Integration (CI)
 
 # To Compile and Test, please follow the following steps - 
-
+1. Install ngrok using this https://ngrok.com/download
+2. Open a new terminal window and run ngork with the following command - ./ngrok http 8081
+3. Take the Forwarding Link found in Forwarding in the ngrok window and add a new webhook in the repo under 
+    Settings -> Webhooks -> Add Webhook -> Payload URL
+4. Set content type to application/json and save webhook
+5. Clone down the repo and start main in the Skeleton code
+6. Checkout the branch of assessment, where you can push and receive an email with information about the build and the tests
 
 # The Compilation for this project has been implemented and unit-tested in the following way - 
 1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used
 2. We virtually execute commands to the terminal. 
 3. Since, we want the results, swe save it from the buffer system and return the results which are then used for the Email Notification. 
 
-The Compilation has been unit-tested in the following way -
+The Compilation has been unit-tested in the  following way -
     - Test if the cloning of the repository works
     - Tets to check if compile class returns an errorCode 0. If it i 0, then we know it is correct
 
@@ -49,6 +55,8 @@ We are aiming for P+, by implementing the
 2. P9 - Property (SE), that is most of our commits are linked to an issue describing the commit
 
 # Contributions -
+Everyone has contributed to the project and there has been a lot of pair programming. 
+
 Lucas Eren :-
 1. Compilation of the cloned repo
 2. Parsing json and reading data from request body
@@ -65,4 +73,5 @@ Gustav Rubbestad :-
 3. CloneRepo
 
 Mayuri Salunke :-
-1. 
+1. README
+2. 

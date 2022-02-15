@@ -4,6 +4,10 @@
 
 # The Compilation for this project has been implemented and unit-tested in the following way - 
 
+The Compilation has been unit-tested in the following way -
+    - Test if the cloning of the repository works
+    - Tets to check if compile class returns an errorCode
+
 # Test Execution has been implemented and unit-tested in the following way -
 
 # Notification has been implemented and unit-tested in the following way - 

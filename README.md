@@ -20,7 +20,8 @@
 3. We used a JAVA code to send emails using Gmail SMTP server
 
 The Notification has been unit-tested in the following way - 
-    - 
+    - Test that the email is sent successfully by checking that the sent boolean is set to be true
+    - Test that emails can't be sent to invalid email_ids
 
 # To run the code and tests, please follow the following steps - 
 Firstly, follow these steps to get ngrok to work (i.e the server) https://dashboard.ngrok.com/get-started/setup. Change from port 80 to 8081 when looking at step 3 (on the link).

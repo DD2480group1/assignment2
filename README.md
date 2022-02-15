@@ -4,15 +4,16 @@
 
 
 # The Compilation for this project has been implemented and unit-tested in the following way - 
-1. Use the CompileProject() and check which system is being used. If it is windows, we need to use a different code
-we virtually execute commands to the terminal. We want the results, so we save it from the buffer system and return the results to be able to use the data for the Notification. 
+1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used
+2. We virtually execute commands to the terminal. 
+3. Since, we want the results, swe save it from the buffer system and return the results which are then used for the Email Notification. 
 
 The Compilation has been unit-tested in the following way -
     - Test if the cloning of the repository works
     - Tets to check if compile class returns an errorCode 0. If it i 0, then we know it is correct
 
 # Test Execution has been implemented and unit-tested in the following way -
-1. As  soon as we had a different test, we test it, by returning certain variables and error code
+1. When we have a different test, we test it by returning certain variables and an error code. 
 
 The Test Execution has been unit-tested in the following way - 
     - Test if the RepoURL is retrieved correctly from test file

@@ -3,8 +3,8 @@ import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 public class compile {
-	public static int compileProject() {
-		int errorCode = -1;
+	public static String compileProject() {
+		String result = "";
 		try {
 			boolean isWindows = isWindows();
 			Process process;
@@ -16,21 +16,19 @@ public class compile {
 				process = Runtime.getRuntime().exec(commands);
 			}
 
-			String result = new BufferedReader(new InputStreamReader(process.getInputStream()))
+			result = new BufferedReader(new InputStreamReader(process.getInputStream()))
 					.lines().collect(Collectors.joining("\n"));
 
 			System.out.println(result);
-			String[] lines = result.split("\n");
-			errorCode = Integer.parseInt(lines[lines.length-1]);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return errorCode;
+		return result;
 	}
 
-	public static int testRepo(){
-		int errorCode = -1;
+	public static String testRepo(){
+		String result = "";
 		try {
 			boolean isWindows = isWindows();
 			Process process;
@@ -42,17 +40,15 @@ public class compile {
 				process = Runtime.getRuntime().exec(commands);
 			}
 
-			String result = new BufferedReader(new InputStreamReader(process.getInputStream()))
+			result = new BufferedReader(new InputStreamReader(process.getInputStream()))
 					.lines().collect(Collectors.joining("\n"));
 
 			System.out.println(result);
-			String[] lines = result.split("\n");
-			errorCode = Integer.parseInt(lines[lines.length-1]);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return errorCode;
+		return result;
 	}
 
 	private static boolean isWindows() {

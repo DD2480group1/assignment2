@@ -17,7 +17,9 @@ public class CompileTest {
     //Tests if the compile class returns an errorCode or not
     @Test
     public void compileTest(){
-        int errorCode = compile.compileProject();
+        String result = compile.compileProject();
+        String[] lines = result.split("\n");
+        int errorCode = Integer.parseInt(lines[lines.length-1]);
         String errorString = String.valueOf(errorCode);
         String errorMessage = "The compilation ended with a error code: " + errorString;
         assertEquals(errorMessage, 0, errorCode);

@@ -3,12 +3,20 @@
 # To Compile and Test, please follow the following steps - 
 
 # The Compilation for this project has been implemented and unit-tested in the following way - 
+1. 
 
 The Compilation has been unit-tested in the following way -
     - Test if the cloning of the repository works
     - Tets to check if compile class returns an errorCode
 
 # Test Execution has been implemented and unit-tested in the following way -
+1. 
+
+The Test Execution has been unit-tested in the following way - 
+    - Test if the RepoURL is retrieved correctly from test file
+    - Test if the email is retrieved correctly from test file
+    - Test if the commit-ID is retrieved correctly from the test file
+    - Test if the commit-message is retrieved correctly from the test file
 
 # Notification has been implemented and unit-tested in the following way - 
 1. The Dependencies were added to the POM file

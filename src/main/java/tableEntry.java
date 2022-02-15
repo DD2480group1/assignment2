@@ -5,18 +5,20 @@ public class tableEntry {
 	String commitId;
 	String branch;
 	Timestamp timeStamp;
-	String description;
+	String buildInfo;
+	String testInfo;
 
-	public tableEntry(String commitId, String branch, Timestamp timestamp, String description) {
+	public tableEntry(String commitId, String branch, Timestamp timestamp, String buildInfo, String testInfo) {
 		this.commitId = commitId;
 		this.branch = branch;
 		this.timeStamp = timestamp;
-		this.description = description;
+		this.buildInfo = buildInfo;
+		this.testInfo = testInfo;
 	}
 
 	@Override
 	public String toString() {
-		return  String.format("commitId: %s, branch: %s, timeStamp: %s, description: %s",
-				commitId, branch, timeStamp, description);
+		return  String.format("commitId: %s, branch: %s, timeStamp: %s, buildInfo: %s, : testInfo: %s",
+				commitId, branch, timeStamp, buildInfo, testInfo);
 	}
 }

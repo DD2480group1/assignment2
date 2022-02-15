@@ -69,7 +69,8 @@ public class JsonUtil {
                 .add("commitId", row.commitId)
                 .add("branch", row.branch)
                 .add("timeStamp", String.valueOf(row.timeStamp))
-                .add("description", row.description)
+                .add("buildInfo", row.buildInfo)
+                .add("testInfo", row.testInfo)
                 .build();
     }
 }

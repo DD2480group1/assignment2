@@ -17,7 +17,8 @@ public class Database {
 				"commitId text, " +
 				"branch txt," +
 				"timeStamp TIMESTAMP," +
-				"description txt" +
+				"buildInfo txt," +
+				"testInfo txt" +
 				")";
 		Statement stmt = conn.createStatement();
 		stmt.executeUpdate(query);
@@ -29,11 +30,15 @@ public class Database {
 
 
 	private static PreparedStatement getInsertPrepStmt(Connection conn, tableEntry entry) throws SQLException {
-		PreparedStatement prepStmt = conn.prepareStatement("INSERT INTO History (commitId, branch, timeStamp, description) VALUES(?, ?, ?, ?)");
+		PreparedStatement prepStmt = conn.prepareStatement(
+				"INSERT INTO History " +
+						"(commitId, branch, timeStamp, buildInfo, testInfo) " +
+						"VALUES(?, ?, ?, ?, ?)");
 		prepStmt.setString(1, entry.commitId);
 		prepStmt.setString(2, entry.branch);
 		prepStmt.setTimestamp(3, entry.timeStamp);
-		prepStmt.setString(4, entry.description);
+		prepStmt.setString(4, entry.buildInfo);
+		prepStmt.setString(5, entry.testInfo);
 		return prepStmt;
 	}
 
@@ -74,9 +79,10 @@ public class Database {
 		String commitId = rs.getString("commitId");
 		String branch = rs.getString("branch");
 		Timestamp timeStamp = rs.getTimestamp("timeStamp");
-		String description = rs.getString("description");
+		String buildInfo = rs.getString("buildInfo");
+		String testInfo = rs.getString("testInfo");
 
-		return new tableEntry(commitId, branch, timeStamp, description);
+		return new tableEntry(commitId, branch, timeStamp, buildInfo, testInfo);
 	}
 
 	public static List<tableEntry> getRows(String repo) {

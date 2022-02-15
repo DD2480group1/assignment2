@@ -6,16 +6,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class SendMail {
+    //This function is based on the tutorial by Rishabh Mishra called How To Send Email In Java Using Gmail SMTP
+    public static boolean sendMail(String compile, String test, String issue, String email) {
+        boolean sent = false;
 
-    public static void sendMail(String compile, String test, String issue, String email) {
-
-        // Recipient's email ID needs to be mentioned.
         String to = email;
-
-        // Sender's email ID needs to be mentioned
         String from = "mailt7458@gmail.com";
-
-        // Assuming you are sending email from through gmails smtp
         String host = "smtp.gmail.com";
 
         // Get system properties
@@ -27,7 +23,7 @@ public class SendMail {
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");
 
-        // Get the Session object.// and pass username and password
+        // Get the Session object
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -38,7 +34,7 @@ public class SendMail {
 
         });
 
-        // Used to debug SMTP issues
+        // Debug SMTP issues
         session.setDebug(true);
 
         try {
@@ -54,17 +50,33 @@ public class SendMail {
             // Set Subject: header field
             message.setSubject("This is a push for " + issue);
 
-            // Now set the actual message
-            message.setText(compile + "\n" + test);
+            String status = "";
+
+            String[] lines = compile.split("\n");
+            int errorCode = Integer.parseInt(lines[lines.length-1]);
+            if (errorCode == 0){
+                status += "THE BUILD OF THE PROJECT WAS SUCCESSFUL \n";
+            }
+            lines = test.split("\n");
+            errorCode = Integer.parseInt(lines[lines.length-1]);
+            if (errorCode == 0){
+                status += "THE RUNNING OF THE TESTS WAS SUCCESSFUL \n";
+            }
+            status += "See additional build and test details below \n";
+            status += "-------------------------------------------";
+            // Set email message
+            String mailcontent = status + compile + "\n" + test;
+            message.setText(mailcontent);
 
             System.out.println("sending...");
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
+            sent = true;
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
-
+        return sent;
     }
 
 }

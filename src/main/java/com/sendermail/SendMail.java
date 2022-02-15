@@ -57,11 +57,16 @@ public class SendMail {
             int errorCode = Integer.parseInt(lines[lines.length-1]);
             if (errorCode == 0){
                 status = status + "THE BUILD OF THE PROJECT WAS SUCCESSFUL \n";
+            } else{
+                status = status + "THE BUILD OF THE PROJECT WAS UNSUCCESSFUL \n";
             }
             lines = test.split("\n");
             errorCode = Integer.parseInt(lines[lines.length-1]);
             if (errorCode == 0){
                 status = status + "THE RUNNING OF THE TESTS WAS SUCCESSFUL \n";
+            } else{
+
+                status = status + "THE RUNNING OF THE TESTS WAS UNSUCCESSFUL \n";
             }
             status = status + "See additional build and test details below \n";
             status = status +  "-------------------------------------------";

@@ -45,10 +45,15 @@ The Notification has been unit-tested in the following way -
     - Test that emails can't be sent to invalid email_ids
 
 
+## History of Past Builds
+1. Start the main function under src/main/java/DatabaseServer and go to http://localhost:8082/abc
+2. The above link shows you the commit id, branch, timestamp, build information and test information. 
+
 ## Grading 
 We are aiming for P+, by implementing the 
 1. P7 - CI feature, that is the CI server keeps the history of past builds
 2. P9 - Property (SE), that is most of our commits are linked to an issue describing the commit
+3. P8 - We have been very creative and proud with our work, as none of the members had any prior knowledge and we have worked collectively to achieve this.
 
 ## Contributions -
 Everyone has contributed to the project and there has been a lot of pair programming. 
@@ -58,16 +63,22 @@ Lucas Eren :-
 2. Parsing json and reading data from request body
 
 Viktor Luthman :-
-1. 
+1. Compilation of the cloned repo
+2. Parsing json and reading data from request body
+3. Working on the history database
 
 Isabel Redtzer :-
-1. 
+1. Testing of the classes
+2. Email Notification
+3. Refactoring and Bug Fixing
+4. SEMAT document
 
 Gustav Rubbestad :-
 1. Netcat testing
 2. Webhook testing
 3. CloneRepo
+4. Working on the history database
 
 Mayuri Salunke :-
 1. README
-2. 
+2. Email Notification

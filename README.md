@@ -8,6 +8,9 @@
 4. Set content type to application/json and save webhook
 5. Clone down the repo and start main in the Skeleton code
 6. Checkout the branch of assessment, where you can push and receive an email with information about the build and the tests
+7. For any assistance, or if you are unable to add a webhook, please contact the following - 
+    Email - isabel.redtzer@gmail.com
+    Contact Number - +46 0708680588
 
 ## The Compilation for this project has been implemented and unit-tested in the following way - 
 1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used

@@ -49,12 +49,21 @@ The Notification has been unit-tested in the following way -
 
 
 ## History of Past Builds
-1. Start the main function under src/main/java/DatabaseServer and go to http://localhost:8082/abc
-2. The above link shows you the commit id, branch, timestamp, build information and test information. 
+We did not manage to finish this, but we managed to finish parts of it. All the code related to build history lies in the branch "database". If it would be possible to complete the code for this criteria after the deadline we would like to do so.
+
+We managed to store the history of builds in local files. Each repo gets its own file in the ``db`` folder. But we did not have time to show it in a nice way like a web page and give the history nor individual builds unique urls.
+It is however possible to get the build history of a project encoded as JSON by making HTTP get requests to the DatabaseServer. 
+It is listening on localhost:8082 and started when along with the SkeletonCode server.
+
+Either the entire history of a repo or a specific commit. 
+To get the entire history of the repo ``foo`` you would go to http://localhost:8082/``foo``.
+To get a specific commit with id ``x`` you would send a GET request to http://localhost:8082/``foo``/``x``.
+
+We are only storing builds of our own repo ("assignment2"), so the only meaningful url to got to is http://localhost:8082/assignment2.
 
 ## Grading 
 We are aiming for P+, by implementing the 
-1. P7 - CI feature, that is the CI server keeps the history of past builds
+1. P7 - CI feature, we partly succeeded in making the CI keep the history of past builds, but we did not finish it completely
 2. P9 - Property (SE), that is most of our commits are linked to an issue describing the commit
 3. P8 - We have been very creative and proud with our work, as none of the members had any prior knowledge and we have worked collectively to achieve this.
 

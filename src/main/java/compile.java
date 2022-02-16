@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
+//This class compiles and tests the code cloned in to the /repo folder
 public class compile {
 	public static String compileProject() {
 		String result = "";

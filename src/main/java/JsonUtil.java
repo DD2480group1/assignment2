@@ -2,6 +2,7 @@ import javax.json.*;
 import java.io.StringReader;
 import java.util.List;
 
+//This class reads information from JSON objects.
 public class JsonUtil {
     /**
      *
@@ -54,23 +55,4 @@ public class JsonUtil {
         return payload.getString("ref");
     }
 
-
-    public static JsonArray encodeQueryResults(List<tableEntry> rows) {
-        JsonArrayBuilder builder = Json.createArrayBuilder();
-        for (tableEntry row : rows) {
-            builder.add(encodeRow(row));
-        }
-
-        return builder.build();
-    }
-
-    public static JsonObject encodeRow(tableEntry row) {
-        return Json.createObjectBuilder()
-                .add("commitId", row.commitId)
-                .add("branch", row.branch)
-                .add("timeStamp", String.valueOf(row.timeStamp))
-                .add("buildInfo", row.buildInfo)
-                .add("testInfo", row.testInfo)
-                .build();
-    }
 }

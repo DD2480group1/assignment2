@@ -4,27 +4,43 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 class DatabaseServer extends AbstractHandler {
-    public static void main(String[] args) throws Exception {
-        Server server = new Server(8082);
-        server.setHandler(new DatabaseServer());
-        server.start();
-        server.join();
-    }
-
     @Override
     public void handle(String s, Request request, jakarta.servlet.http.HttpServletRequest httpServletRequest, jakarta.servlet.http.HttpServletResponse httpServletResponse) throws IOException, jakarta.servlet.ServletException {
         httpServletResponse.setContentType("text/html;charset=utf-8");
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         request.setHandled(true);
-        System.out.println(s);
 
-        String repo = s.split("/")[1];
-        String commitId = request.getParameter("commitId");
+        String[] path = s.split("/");
+        String repo = path[1];
+        String commitId = (path.length > 2) ? path[2] : null;
 
-        httpServletResponse.getWriter().println(getResponse(repo, commitId));
+        // When accessing localhost:8082 from the browser it will also ask for favicon.ico.
+        if (repo.equals("favicon.ico")) {
+            httpServletResponse.getWriter().println();
+            return;
+        }
+
+        if (commitId == null) {
+            List<tableEntry> rows = Database.getRows(repo);
+            httpServletResponse.getWriter().println(JsonUtil.encodeQueryResults(rows));
+        } else {
+            Optional<tableEntry> row = Database.getRow(repo, commitId);
+            String res;
+            if (row.isPresent()) {
+                res = JsonUtil.encodeRow(row.get()).toString();
+            } else {
+                res = "No result found";
+            }
+
+            httpServletResponse.getWriter().println(res);
+        }
+
+
+        // httpServletResponse.getWriter().println(getResponse(repo, commitId));
     }
 
     private static String getResponse(String repo, String commitId) {

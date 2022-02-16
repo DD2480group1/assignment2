@@ -43,10 +43,16 @@ class SkeletonCode extends AbstractHandler {
 
     // used to start the CI server in command line
     public static void main(String[] args) throws Exception {
-        Server server = new Server(8081);
-        server.setHandler(new SkeletonCode());
-        server.start();
-        server.join();
+        Server webhook = new Server(8081);
+        webhook.setHandler(new SkeletonCode());
+        webhook.start();
+
+        Server database = new Server(8082);
+        database.setHandler(new DatabaseServer());
+        database.start();
+
+        webhook.join();
+        database.join();
     }
 
     @Override

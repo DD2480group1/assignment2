@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -87,6 +88,12 @@ class SkeletonCode extends AbstractHandler {
 
         SendMail mail = new SendMail();
         mail.sendMail(compileMessage, testMessage, ref, email);
+
+
+        String commitId = JsonUtil.getHeadCommitId(obj);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String repo = JsonUtil.getRepoName(obj);
+        Database.addCommit(repo, new tableEntry(commitId, ref, timestamp, compileMessage, testMessage));
 
         httpServletResponse.getWriter().println("CI job done");
     }

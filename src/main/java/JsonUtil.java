@@ -54,6 +54,10 @@ public class JsonUtil {
         return payload.getString("ref");
     }
 
+    public static String getRepoName(JsonObject payload) {
+        return payload.getJsonObject("repository").getString("name");
+    }
+
 
     public static JsonArray encodeQueryResults(List<tableEntry> rows) {
         JsonArrayBuilder builder = Json.createArrayBuilder();

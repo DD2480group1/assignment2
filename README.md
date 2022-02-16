@@ -15,7 +15,7 @@
 ## The Compilation for this project has been implemented and unit-tested in the following way - 
 1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used
 2. We virtually execute commands to the terminal. 
-3. Since, we want the results, swe save it from the buffer system and return the results which are then used for the Email Notification. 
+3. Since, we want the results, we save it from the buffer system and return the results which are then used for the Email Notification. 
 
 The Compilation has been unit-tested in the  following way -
     - Test if the cloning of the repository works

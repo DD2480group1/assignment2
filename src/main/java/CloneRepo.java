@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+/*This function clones the code from the repo into a folder /repo to be able to test*/
 public class CloneRepo {
     public static boolean cloneRepo(String url, String branch){
         String path = "./repo/";

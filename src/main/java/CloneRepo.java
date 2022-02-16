@@ -15,7 +15,7 @@ public class CloneRepo {
             FileUtils.delete(new File(path), FileUtils.RECURSIVE);
         } catch (IOException e) {}
         try {
-            Git.cloneRepository().setURI(url).setBranchesToClone(Arrays.asList(branch)).setDirectory(Paths.get(path).toFile()).call();
+            Git.cloneRepository().setURI(url).setBranchesToClone(Arrays.asList(branch)).setBranch(branch).setDirectory(Paths.get(path).toFile()).call();
             return true;
         } catch (GitAPIException e) {
             e.printStackTrace();

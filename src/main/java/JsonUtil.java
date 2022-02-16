@@ -1,7 +1,6 @@
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import javax.json.*;
 import java.io.StringReader;
+import java.util.List;
 
 public class JsonUtil {
     /**
@@ -56,6 +55,22 @@ public class JsonUtil {
     }
 
 
+    public static JsonArray encodeQueryResults(List<tableEntry> rows) {
+        JsonArrayBuilder builder = Json.createArrayBuilder();
+        for (tableEntry row : rows) {
+            builder.add(encodeRow(row));
+        }
 
+        return builder.build();
+    }
 
+    public static JsonObject encodeRow(tableEntry row) {
+        return Json.createObjectBuilder()
+                .add("commitId", row.commitId)
+                .add("branch", row.branch)
+                .add("timeStamp", String.valueOf(row.timeStamp))
+                .add("buildInfo", row.buildInfo)
+                .add("testInfo", row.testInfo)
+                .build();
+    }
 }

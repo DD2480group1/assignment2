@@ -23,4 +23,14 @@ public class CompileTest {
         String errorMessage = "The compilation ended with a error code: " + errorString;
         assertEquals(errorMessage, 0, errorCode);
     }
+    //Tests if the test class returns an errorCode or not
+    @Test
+    public void testsTest(){
+        String test = compile.testRepo();
+        String[] lines = test.split("\n");
+        int errorCode = Integer.parseInt(lines[lines.length-1]);
+        String errorString = String.valueOf(errorCode);
+        String errorMessage = "The compilation ended with a error code: " + errorString;
+        assertEquals(errorMessage, 0, errorCode);
+    }
 }

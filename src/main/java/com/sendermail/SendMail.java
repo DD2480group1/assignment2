@@ -13,10 +13,10 @@ public class SendMail {
     /**
      * Sends an email to {@code mail} about the compilation and test results of the issue {@code issue}.
      * This function is based on the tutorial by Rishabh Mishra called How To Send Email In Java Using Gmail SMTP.
-     * @param compile
-     * @param test
-     * @param issue
-     * @param email
+     * @param compile a String containing the compilation log
+     * @param test a String containing the test log
+     * @param issue a String containing the name of the issue
+     * @param email a String containing the senders email
      * @return whether the mail was sent or not
      */
     public static boolean sendMail(String compile, String test, String issue, String email) {

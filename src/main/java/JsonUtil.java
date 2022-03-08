@@ -2,7 +2,10 @@ import javax.json.*;
 import java.io.StringReader;
 import java.util.List;
 
-//This class reads information from JSON objects.
+/**
+ * A helper class to retrieve needed data from the requests sent from GitHub's
+ * webhooks.
+ */
 public class JsonUtil {
     /**
      *
@@ -16,7 +19,7 @@ public class JsonUtil {
     /**
      *
      * @param payload the http payload of the webhook request
-     * @return the url of the github repo
+     * @return the url of the GitHub repo
      */
     public static String getRepoUrl(JsonObject payload) {
         return payload.getJsonObject("repository").getString("url");

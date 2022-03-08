@@ -2,8 +2,19 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-//This class compiles and tests the code cloned in to the /repo folder
+/**
+ * Tries to build the cloned project. This class assumes that the project to
+ * be located in the root of this project and lie in a directory called "repo".
+ * This class only supports building maven projects and no other type of projects.
+ */
 public class compile {
+	/**
+	 * Tries to compile the repo under the directory "repo/" located at the root
+	 * of this project.
+	 * @return the maven build messages followed by a new line with a number
+	 * where 0 indicates success and any other number indicates failure. Or if
+	 * an exception was thrown an empty string is returned.
+	 */
 	public static String compileProject() {
 		String result = "";
 		try {
@@ -28,6 +39,13 @@ public class compile {
 		return result;
 	}
 
+	/**
+	 * Tries to runt the tests in the repo under the directory "repo/" located at
+	 * the root of this project.
+	 * @return the maven test messages followed by a new line with a number
+	 * where 0 indicates success and any other number indicates failure. Or if
+	 * an exception was thrown an empty string is returned.
+	 */
 	public static String testRepo(){
 		String result = "";
 		try {

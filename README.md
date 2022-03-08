@@ -19,8 +19,21 @@ The CI server also implements a notification system that sends an email to the c
 
 ## Implementation and unit-testing
 ### Compilation
+In order to compile the project it first has to be fetched from Github, and then compiled.
+We use the JGit library to accomplish this with the built-in functions cloneRepository(), which can take arguments like a URL to the branch of the repo and clone it to a specified path.
+
+When the branch is cloned it is time to build it, this is done by utilizing the Runtime library in Java which can inject terminal commands during runtime. 
+We are then able to run ***mvn compile*** on the project and catch the response from the terminal.
+
+The compilation unit-test looks at the exit code after running ***mvn compile***, if it is 0 the compilation was successful, if it is non-zero something went wrong.
 
 ### Testing
+If the build is successful it is time to run all the tests on the branch.
+Ths is done in a similar fashion to the compilation, where we can inject terminal commands using Runtime. 
+This time we call ***mvn test*** instead. This results in running all tests on the branch and catching the terminal response with the purpose of forwarding it to the committer.
+
+The testing unit-test works the same way as the compilation unit-test.
+Injecting terminal commands with Runtime and then looks at the exit code after running ***mvn test*** to see if all tests passed.
 
 ### Notification
 

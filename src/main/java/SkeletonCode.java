@@ -13,14 +13,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * Skeleton of a ContinuousIntegrationServer which acts as webhook
- * See the Jetty documentation for API documentation of those classes.
+ * A continuous integration server which listens for requests sent from GitHub
+ * webhooks.
  */
 class SkeletonCode extends AbstractHandler {
     /**
      * Function to test read our test.json file (see that everything works)
-     * @param path
-     * @return
+     * @param path the path to the file to read from
+     * @return the contents of the file as a String
      */
     public static String readFile(String path) {
         File file = new File(path);
@@ -36,9 +36,11 @@ class SkeletonCode extends AbstractHandler {
 
         return contents;
     }
-
-
-    // used to start the CI server in command line
+    
+    /**
+     * Starts the continuous integration server and listens to port 8081.
+     * @throws Exception may throw an exception upon starting the server.
+     */
     public static void main(String[] args) throws Exception {
         Server server = new Server(8081);
         server.setHandler(new SkeletonCode());
@@ -46,6 +48,15 @@ class SkeletonCode extends AbstractHandler {
         server.join();
     }
 
+    /**
+     * Handles requests sent to the server
+     * @param s the target of the request.
+     * @param request the original unwrapped request object
+     * @param httpServletRequest The request either as the Request object or a wrapper of that request
+     * @param httpServletResponse The response as the Response object or a wrapper of that request
+     * @throws IOException if unable to handle the request or response processing
+     * @throws jakarta.servlet.ServletException if unable to handle the request or response due to underlying servlet issue
+     */
     @Override
     public void handle(String s, Request request, jakarta.servlet.http.HttpServletRequest httpServletRequest, jakarta.servlet.http.HttpServletResponse httpServletResponse) throws IOException, jakarta.servlet.ServletException {
         httpServletResponse.setContentType("text/html;charset=utf-8");

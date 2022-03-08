@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * A continuous integration server which listens for requests sent from GitHub
  * webhooks.
  */
-class SkeletonCode extends AbstractHandler {
+public class SkeletonCode extends AbstractHandler {
     /**
      * Function to test read our test.json file (see that everything works)
      * @param path the path to the file to read from

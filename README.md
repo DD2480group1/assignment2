@@ -13,14 +13,12 @@ The CI server also implements a notification system that sends an email to the c
 4. Set content type to application/json and save webhook
 5. Clone down the repo and start main in the Skeleton code
 6. Checkout the branch of assessment, where you can push and receive an email with information about the build and the tests
-7. For any assistance, or if you are unable to add a webhook, please contact the following - 
-    Email - isabel.redtzer@gmail.com
-    Contact Number - +46 0708680588
+
 
 ## Implementation and unit-testing
 ### Compilation
 In order to compile the project it first has to be fetched from Github, and then compiled.
-We use the JGit library to accomplish this with the built-in functions cloneRepository(), which can take arguments like a URL to the branch of the repo and clone it to a specified path.
+We use the JGit library to accomplish this with the built-in function cloneRepository(), which can take arguments like a URL to the branch of the repo and clone it to a specified path.
 
 When the branch is cloned it is time to build it, this is done by utilizing the Runtime library in Java which can inject terminal commands during runtime. 
 We are then able to run ***mvn compile*** on the project and catch the response from the terminal.
@@ -37,11 +35,11 @@ Injecting terminal commands with Runtime and then looks at the exit code after r
 
 ### Notification
 The Pre-requisites for the implementation of Notification are the following -
-- Eclipse IDE
+
 - Java Runtime Environment
 
 In order to the implement the notification feature, the following steps were followed -
-1. A default POM file is created and the dependency 'javax.mail.jar 1.6.2' is added to the POM file
+1. The dependency 'javax.mail.jar 1.6.2' is added to the POM file
 2. A package 'com.sendemail' is created with a class 'SendEmail'
 3. The following packages and classes are imported for the code to work
     - import java.util.Properties

@@ -36,28 +36,14 @@ The testing unit-test works the same way as the compilation unit-test.
 Injecting terminal commands with Runtime and then looks at the exit code after running ***mvn test*** to see if all tests passed.
 
 ### Notification
+The Pre-requisites for the implementation of Notification are the following -
+- Eclipse IDE
+- Java Runtime Environment
 
-## The Compilation for this project has been implemented and unit-tested in the following way - 
-1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used
-2. We virtually execute commands to the terminal. 
-3. Since, we want the results, we save it from the buffer system and return the results which are then used for the Email Notification. 
-
-The Compilation has been unit-tested in the  following way -
-    - Test if the cloning of the repository works
-    - Tets to check if compile class returns an errorCode 0. If it i 0, then we know it is correct
-
-## Test Execution has been implemented and unit-tested in the following way -
-1. When we have a different test, we test it by returning certain variables and an error code. 
-
-The Test Execution has been unit-tested in the following way - 
-    - Test if the RepoURL is retrieved correctly from test file
-    - Test if the email is retrieved correctly from test file
-    - Test if the commit-ID is retrieved correctly from the test file
-    - Test if the commit-message is retrieved correctly from the test file
-
-## Notification has been implemented and unit-tested in the following way - 
-1. The Dependencies were added to the POM file
-2. We imported the following packages and classes for the code to work
+In order to the implement the notification feature, the following steps were followed -
+1. A default POM file is created and the dependency 'javax.mail.jar 1.6.2' is added to the POM file
+2. A package 'com.sendemail' is created with a class 'SendEmail'
+3. The following packages and classes are imported for the code to work
     - import java.util.Properties
     - import javax.mail.Message
     - import javax.mail.MessagingException
@@ -68,12 +54,11 @@ The Test Execution has been unit-tested in the following way -
     - import javax.mail.internet.MimeMessage
 3. We used a JAVA code to send emails using Gmail SMTP server
 
-The Notification has been unit-tested in the following way - 
-    - Test that the email is sent successfully by checking that the sent boolean is set to be true
-    - Test that emails can't be sent to invalid email_ids
+The Notification has been unit-tested in the following way -
+- Test that the email is sent successfully by checking that the sent boolean is set to be true
+- Test that emails can't be sent to invalid email_ids
 
-
-## Contributions -
+## Contributions
 Everyone has contributed to the project and there has been a lot of pair programming. 
 
 Lucas Eren :-
@@ -83,7 +68,6 @@ Lucas Eren :-
 Viktor Luthman :-
 1. Compilation of the cloned repo
 2. Parsing json and reading data from request body
-3. Working on the history database
 
 Isabel Redtzer :-
 1. Testing of the classes
@@ -92,10 +76,9 @@ Isabel Redtzer :-
 4. SEMAT document
 
 Gustav Rubbestad :-
-1. Netcat testing
-2. Webhook testing
-3. CloneRepo
-4. Working on the history database
+1. Netcat and Webhook testing
+2. CloneRepo
+3. README
 
 Mayuri Salunke :-
 1. README

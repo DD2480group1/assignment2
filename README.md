@@ -1,5 +1,10 @@
 # DD2480 - Continuous Integration (CI)
 
+## Description of project
+This project implements a small Continuous Integration (CI) server.
+The core functionality of the CI server is to fetch, build and test any code that is pushed to the repository.
+The CI server also implements a notification system that sends an email to the committer with the results of the build and tests. 
+
 ## To Compile and Test, please follow the following steps - 
 1. Install ngrok using this https://ngrok.com/download
 2. Open a new terminal window and run ngork with the following command - ./ngrok http 8081
@@ -11,6 +16,13 @@
 7. For any assistance, or if you are unable to add a webhook, please contact the following - 
     Email - isabel.redtzer@gmail.com
     Contact Number - +46 0708680588
+
+## Implementation and unit-testing
+### Compilation
+
+### Testing
+
+### Notification
 
 ## The Compilation for this project has been implemented and unit-tested in the following way - 
 1. Use the CompileProject() and check which system is being used. If it is windows, a different code will be used
@@ -47,25 +59,6 @@ The Notification has been unit-tested in the following way -
     - Test that the email is sent successfully by checking that the sent boolean is set to be true
     - Test that emails can't be sent to invalid email_ids
 
-
-## History of Past Builds
-We did not manage to finish this, but we managed to finish parts of it. All the code related to build history lies in the branch "database". If it would be possible to complete the code for this criteria after the deadline we would like to do so.
-
-We managed to store the history of builds in local files. Each repo gets its own file in the ``db`` folder. But we did not have time to show it in a nice way like a web page and give the history nor individual builds unique urls.
-It is however possible to get the build history of a project encoded as JSON by making HTTP get requests to the DatabaseServer. 
-It is listening on localhost:8082 and started when along with the SkeletonCode server.
-
-Either the entire history of a repo or a specific commit. 
-To get the entire history of the repo ``foo`` you would go to http://localhost:8082/``foo``.
-To get a specific commit with id ``x`` you would send a GET request to http://localhost:8082/``foo``/``x``.
-
-We are only storing builds of our own repo ("assignment2"), so the only meaningful url to got to is http://localhost:8082/assignment2.
-
-## Grading 
-We are aiming for P+, by implementing the 
-1. P7 - CI feature, we partly succeeded in making the CI keep the history of past builds, but we did not finish it completely
-2. P9 - Property (SE), that is most of our commits are linked to an issue describing the commit
-3. P8 - We have been very creative and proud with our work, as none of the members had any prior knowledge and we have worked collectively to achieve this.
 
 ## Contributions -
 Everyone has contributed to the project and there has been a lot of pair programming. 

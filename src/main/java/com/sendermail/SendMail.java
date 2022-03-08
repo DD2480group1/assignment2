@@ -5,8 +5,20 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * A class for sending emails of the results of the build and tests.
+ */
 public class SendMail {
-    //This function is based on the tutorial by Rishabh Mishra called How To Send Email In Java Using Gmail SMTP
+
+    /**
+     * Sends an email to {@code mail} about the compilation and test results of the issue {@code issue}.
+     * This function is based on the tutorial by Rishabh Mishra called How To Send Email In Java Using Gmail SMTP.
+     * @param compile
+     * @param test
+     * @param issue
+     * @param email
+     * @return whether the mail was sent or not
+     */
     public static boolean sendMail(String compile, String test, String issue, String email) {
         boolean sent = false;
 

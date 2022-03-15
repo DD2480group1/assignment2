@@ -36,19 +36,4 @@ public class CompileTest {
         String errorMessage = "The compilation ended with a error code: " + errorString;
         assertEquals(errorMessage, 0, errorCode);
     }
-
-    /**
-     * The testsTest() method gets  error message from the log when compiling the project
-     * and asserts that the value of the errorCode is 0.
-     * The log is build from running 'mvn test'
-     */
-    @Test
-    public void testsTest(){
-        String test = compile.testRepo();
-        String[] lines = test.split("\n");
-        int errorCode = Integer.parseInt(lines[lines.length-1]);
-        String errorString = String.valueOf(errorCode);
-        String errorMessage = "The compilation ended with a error code: " + errorString;
-        assertEquals(errorMessage, 0, errorCode);
-    }
 }

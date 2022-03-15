@@ -1,7 +1,7 @@
 import javax.json.*;
 import java.io.StringReader;
 import java.util.List;
-//test
+
 /**
  * A helper class to retrieve needed data from the requests sent from GitHub's
  * webhooks.

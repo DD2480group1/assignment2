@@ -10,19 +10,10 @@ import static org.junit.Assert.assertTrue;
  *  @author  Isabel Redtzer
  * */
 public class JsonTest {
-    static JsonUtil json;
-    static JsonObject jsonObject;
-
-    /**
-     * setUp() accesses data from the static test file in src/main/java/test.json
-     * */
-    @BeforeClass
-    public static void setUp(){
-        SkeletonCode skeletonCode = new SkeletonCode();
-        String test = skeletonCode.readFile("./src/main/java/test.json");
-        json = new JsonUtil();
-        jsonObject = json.getJson(test);
-    }
+    SkeletonCode skeletonCode = new SkeletonCode();
+    String test = skeletonCode.readFile("./src/main/java/test.json");
+    JsonUtil json = new JsonUtil();
+    JsonObject jsonObject = json.getJson(test);
 
     /**
      * repoURLTest() tests that the repoURL is fetched correctly.

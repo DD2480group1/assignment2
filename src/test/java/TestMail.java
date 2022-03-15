@@ -13,16 +13,7 @@ import static org.junit.Assert.assertTrue;
  *  @author  Isabel Redtzer
  * */
 public class TestMail {
-    private static SendMail mail;
-
-    /**
-     * setUp() creates a new SendMail object.
-     * */
-    @BeforeClass
-    public static void setUp(){
-        mail = new SendMail();
-    }
-
+    SendMail mail = new SendMail();
 
     /**
      * testMail() checks that the boolean returned from mail.sendMail() is true.

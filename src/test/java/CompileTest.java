@@ -11,18 +11,9 @@ import static org.junit.Assert.assertEquals;
  * @author  Isabel Redtzer
  */
 public class CompileTest {
-    private static compile compile;
-    private static boolean cloneSucceeded;
+    private static compile compile = new compile();
+    private static boolean cloneSucceeded = CloneRepo.cloneRepo("https://github.com/DD2480group1/assignment2/", "refs/heads/main");
 
-    /**
-     * setUp() creates a new compile object and a boolean with the result of cloning the repo.
-     * */
-    @BeforeClass
-    public static void setUp(){
-        compile = new compile();
-        cloneSucceeded = CloneRepo.cloneRepo("https://github.com/DD2480group1/assignment2/", "refs/heads/main");
-
-    }
     /**
      * The cloneTest function will assert that the cloning of the repo is successful.
      */
